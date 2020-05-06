@@ -1,0 +1,31 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "access_key": "{{user `aws_access_key`}}",
+    "ami_name": "cellxpedite-{{timestamp}}",
+    "associate_public_ip_address" : true,
+    "iam_instance_profile" : "woolflab",
+    "instance_type": "m4.large",
+    "region": "us-east-1",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "security_group_ids": ["sg-25d1c25b"],
+    "source_ami": "ami-40d28157",
+    "ssh_username": "ubuntu",
+    "subnet_id" : "subnet-63222606",
+    "type" : "amazon-ebs",
+    "vpc_id" : "vpc-987fa6e1",
+    "launch_block_device_mappings": [{
+      "device_name": "/dev/sda1",
+      "volume_size": 30,
+      "volume_type": "gp2",
+      "delete_on_termination": true
+    }]
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "script": "create_cellxpedite_env.sh"
+  }]
+}
