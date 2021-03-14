@@ -1,0 +1,9 @@
+Step 1: Install Anaconda from https://anaconda.org/
+
+Step 2: Open a terminal and create a Python2 environment with the required packages
+conda create --name cxplite python=2.7
+conda activate cxplite
+pip install numpy pandas scipy tifffile opencv-python==4.2.0.32
+
+Step 3: Run the app from a terminal
+python cxp.py
