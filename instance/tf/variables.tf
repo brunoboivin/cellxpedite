@@ -19,8 +19,8 @@ variable "github_project"       { default = "git@github.com:brunoboivin/cellxped
 # scna8a: used scn8a well mapping and pre-computed threshold
 variable "analysis_type"        { default = "scn8a" }
 variable "script_file"          { default = "analyze_plate.sh" }
-variable "illum_pipeline"       { default = "gcampillumination.cppipe" }
-variable "segment_pipeline"     { default = "segmentation_feb16.cppipe" }
+variable "illum_pipeline"       { default = "illumination_correction.cppipe" }
+variable "segment_pipeline"     { default = "cell_segmentation.cppipe" }
 
 # AWS Credentials
 variable "key_name"             { default = "aws-bruno-hms" }
