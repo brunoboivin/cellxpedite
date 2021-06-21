@@ -19,13 +19,13 @@ sudo apt-get install -y default-jdk
 # miniconda
 # http://conda.pydata.org/docs/help/silent.html
 #-----------------------------
-curl -o /home/ubuntu/miniconda3.sh "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-bash /home/ubuntu/miniconda3.sh -b -p $HOME/miniconda3
+wget https://repo.continuum.io/miniconda/Miniconda3-4.3.27.1-Linux-x86_64.sh
+bash /home/ubuntu/Miniconda3-4.3.27.1-Linux-x86_64.sh -b -p $HOME/miniconda3
 tee /home/ubuntu/.profile <<EOL
 PATH="$HOME/miniconda3/bin:$PATH"
 EOL
 source /home/ubuntu/.profile
-rm miniconda3.sh
+rm Miniconda3-4.3.27.1-Linux-x86_64.sh
 # configure miniconda
 conda update -y conda
 conda config --set always_yes True
@@ -60,7 +60,7 @@ dependencies:
   - pip
   - plotly
   - pytest
-  - python=2
+  - python=3.6
   - scikit-image
   - scipy
   - seaborn
@@ -135,11 +135,7 @@ sudo Rscript -e 'devtools::install_github("shntnu/cytominer", ref="handle-na-hac
 #-----------------------------
 sudo apt-get install -y bc
 #-----------------------------
-# gsl and mlpy
+# mlpy
 #-----------------------------
-sudo apt-get install -y gsl-bin libgsl0-dev
-wget https://sourceforge.net/projects/mlpy/files/mlpy%203.5.0/mlpy-3.5.0.tar.gz
-tar xvzf mlpy-3.5.0.tar.gz
 source activate cxp
-cd mlpy-3.5.0/
-python setup.py install
+conda install -c bioconda mlpy
