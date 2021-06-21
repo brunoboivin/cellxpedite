@@ -20,8 +20,8 @@ Wells can then be processed in parallel using the available cores on each instan
 This parallelization scheme can theoretically scale to any number of plates without
 increasing processing time beyond the overhead required to spin up the additional computing instances.
 
-## Usage
-Instructions for setting up CELLXPEDITE are available on our [wiki page](https://github.com/brunoboivin/cellxpedite/wiki/Setup). 
+## Setup & Usage
+Instructions for setting up and using CELLXPEDITE are available on our [wiki page](https://github.com/brunoboivin/cellxpedite/wiki/Setup-&-Usage). 
 The platform was originally designed for the purpose of studying the activity of motor neurons imaged under confocal microscopy,
 specifically screening for compounds able to revert the perturbances in neuronal activity induced by the SOD1
 mutation associated with amyotrophic lateral sclerosis.
@@ -31,4 +31,8 @@ We encourage and welcome contributions from the community to extend the use case
 The development of this tool is the result of a collaboration
 between Clifford Woolf's lab at Boston Children's Hospital,
 Anne Carpenter's lab at the Broad Institute of Harvard and MIT, 
-and Kevin Eggan's lab at Harvard University.
+and Kevin Eggan's lab at Harvard University. 
+To cite our work, please refer to the associated manuscript entitled
+"A Multiparametric Activity Profiling Platform for Neuron Disease Phenotyping and Drug Screening".
+
+![institutions](img/institution_logos.png "Institutions")
