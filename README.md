@@ -32,7 +32,6 @@ The development of this tool is the result of a collaboration
 between Clifford Woolf's lab at Boston Children's Hospital,
 Anne Carpenter's lab at the Broad Institute of Harvard and MIT, 
 and Kevin Eggan's lab at Harvard University. 
-To cite our work, please refer to the associated manuscript entitled
-"A Multiparametric Activity Profiling Platform for Neuron Disease Phenotyping and Drug Screening".
+To cite our work, please refer to the associated manuscript: [A Multiparametric Activity Profiling Platform for Neuron Disease Phenotyping and Drug Screening](https://www.biorxiv.org/content/10.1101/2021.06.22.449195v1).
 
 ![institutions](img/institution_logos.png "Institutions")
