@@ -4,7 +4,7 @@ import os, sys
 import csv
 import skimage.io
 import numpy
-import scipy.misc
+import imageio
 import scipy.optimize
 import pandas
 import bioformats
@@ -74,10 +74,10 @@ def extractTimeseriesFromWell(config, well, segmentsfilepattern="{0}_maxprojecti
     timelabels = metadata_dict["timelabels"]
 
     # read illum corr file
-    img_illum = scipy.misc.imread(illumpath)
+    img_illum = imageio.imread(illumpath)
 
     # read segments from image and build map (ObjectNumber,Points)
-    segments_img = scipy.misc.imread(os.path.join(segmentsdir, "gcampsegmentation", segmentsfilepattern.format(well)))
+    segments_img = imageio.imread(os.path.join(segmentsdir, "gcampsegmentation", segmentsfilepattern.format(well)))
     d = {}
     for i in numpy.unique(segments_img[segments_img > 0]):
         d[i] = numpy.nonzero(segments_img == i)

@@ -86,8 +86,8 @@ def pixel_timeseries_from_well(metadata_dict, well):
     # get random col/row indices
     firstImg = imageReader.read_image_stack(image_path_list[:1])
     n = metadata_dict["config"]["globaldecay"]["pixelsperwell"]  # num of random pixels per well
-    row = random.sample(xrange(firstImg.shape[0]), n)
-    col = random.sample(xrange(firstImg.shape[1]), n)
+    row = random.sample(range(firstImg.shape[0]), n)
+    col = random.sample(range(firstImg.shape[1]), n)
 
     # define batch size
     batch_size = 50

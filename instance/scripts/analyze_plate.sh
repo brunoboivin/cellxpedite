@@ -47,8 +47,6 @@ aws s3 sync "s3://${S3OUTPUTBUCKET}/${DATASET}" "${ANALYSISPATH}"
 echo `date` "=> CP S3->Instance" >> "${TIMESTAMPSFILE}"
 
 # Clone project source code from GitHub
-chmod 400 ~/.ssh/id_rsa
-ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 git clone ${GITHUBPROJECT}
 
 # append info to config file
@@ -68,18 +66,20 @@ if [ ! "$(ls -A ${ANALYSISPATH}/metadata)" ]; then
     # Remove compromised wells
     python ${SRCPATH}/utils/removeCompromisedWells.py ${CONFIGFILE}
     # Initialize metadata files
-     python ${SRCPATH}/utils/metadataExtractor.py ${CONFIGFILE}
-     # Remove inconsistent wells
-     python ${SRCPATH}/utils/removeInconsistentWells.py ${CONFIGFILE}
+    python ${SRCPATH}/utils/metadataExtractor.py ${CONFIGFILE}
+    # Remove inconsistent wells
+    python ${SRCPATH}/utils/removeInconsistentWells.py ${CONFIGFILE}
 fi
 # Generate illum filelist
 python ${SRCPATH}/utils/filelistGenerator.py "${INPUTDIR}" "${ANALYSISPATH}"/filelists ${CONFIGFILE} 0.2
 source deactivate cxp
 
+# make cellprofiler script executable
+chmod 777 ${GITPROJECTPATH}/instance/scripts/run_cell_profiler.sh
+
 # Illumination correction pipeline
 if [ ! "$(ls -A ${ANALYSISPATH}/illum)" ]; then
     source activate cellpainting_python_3
-    chmod 777 ${GITPROJECTPATH}/instance/scripts/run_cell_profiler.sh
     cd ${GITPROJECTPATH}/instance/scripts
     ./run_cell_profiler.sh -b "${DATASET}" \
     --filelist_dir "${ANALYSISPATH}"/filelists \
@@ -115,7 +115,6 @@ if [ ! "$(ls -A ${ANALYSISPATH}/segments)" ]; then
 
     # Segmentation pipeline ( ${SEGMENTPIPELINE} )
     source activate cellpainting_python_3
-    chmod 777 ${GITPROJECTPATH}/instance/scripts/run_cell_profiler.sh
     cd ${GITPROJECTPATH}/instance/scripts
     ./run_cell_profiler.sh -b "${DATASET}" \
     --filelist_dir "${ANALYSISPATH}"/filelists \

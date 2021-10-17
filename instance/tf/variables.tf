@@ -9,7 +9,7 @@ variable "dataset" {
 variable "num_instances"        { default = 1 }
 variable "s3_input_bucket"      { default = "cellxpedite/input/myplate1" }
 variable "s3_output_bucket"     { default = "cellxpedite/output/myplate1" }
-variable "github_project"       { default = "git@github.com:brunoboivin/cellxpedite.git" }
+variable "github_project"       { default = "https://github.com/brunoboivin/cellxpedite.git" }
 
 # Analysis Settings
 # analysis_type should be one of:

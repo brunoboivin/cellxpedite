@@ -1,6 +1,6 @@
 from __future__ import division
 import sys, os
-import ConfigParser
+import configparser
 import csv, os, glob
 from src.utils import cxpPrinter
 
@@ -20,7 +20,7 @@ def removeCompromisedWells(config):
     cxpPrinter.cxpPrint('Checking for compromised wells')
 
     # parse config file
-    cfgparser = ConfigParser.ConfigParser()
+    cfgparser = configparser.ConfigParser()
     cfgparser.read(config)
     platename = cfgparser.get("var", "platename")
     inputdir = cfgparser.get("var", "imagedir")

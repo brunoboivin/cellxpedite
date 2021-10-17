@@ -11,7 +11,7 @@
     "instance_type": "m4.large",
     "region": "us-east-1",
     "secret_key": "{{user `aws_secret_key`}}",
-    "source_ami": "ami-40d28157",
+    "source_ami": "ami-09e67e426f25ce0d7",
     "ssh_username": "ubuntu",
     "type" : "amazon-ebs",
     "launch_block_device_mappings": [{

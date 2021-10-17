@@ -5,7 +5,7 @@ import skimage.io
 from src.utils import imageReader, metadataExtractor, cxpPrinter
 import bioformats
 import javabridge
-import scipy.misc
+import imageio
 
 
 @click.command()
@@ -34,7 +34,7 @@ def process_well_maxproj(config, well):
 
     # read illum correction file
     illumpath = metadata_dict["config"]["var"]["illumpath"]
-    img_illum = scipy.misc.imread(illumpath)  # do not use skimage.io.imread here, dims don't work
+    img_illum = imageio.imread(illumpath)  # do not use skimage.io.imread here, dims don't work
 
     # identify images/metadata for a given well
     df_well_metadata = metadata_dict["df_well_dict"][well]

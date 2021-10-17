@@ -1,6 +1,6 @@
 from __future__ import division
 import sys, os
-import ConfigParser
+import configparser
 import os, glob
 from src.utils import cxpPrinter, metadataExtractor
 
@@ -26,7 +26,7 @@ def removeInconsistentWells(config):
     numPoints = 45
 
     # parse config file
-    cfgparser = ConfigParser.ConfigParser()
+    cfgparser = configparser.ConfigParser()
     cfgparser.read(config)
     inputdir = cfgparser.get("var", "imagedir")
     metadatadir = cfgparser.get("var", "metadatadir")

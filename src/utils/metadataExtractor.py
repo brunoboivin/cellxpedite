@@ -1,4 +1,4 @@
-import ConfigParser
+import configparser
 import json
 import os
 import re
@@ -19,7 +19,7 @@ def createMetadataFiles(config):
     cxpPrinter.cxpPrint('Creating metadata files')
 
     # parse config
-    cfgparser = ConfigParser.ConfigParser()
+    cfgparser = configparser.ConfigParser()
     cfgparser.read(config)
     imagedir = cfgparser.get("var", "imagedir")
     metadatadir = cfgparser.get("var", "metadatadir")
@@ -145,7 +145,7 @@ def re_identify_image_set(filename, image_names_pattern):
 
 def import_metadata(config):
     # add the config file to the dictionary
-    cfgparser = ConfigParser.ConfigParser()
+    cfgparser = configparser.ConfigParser()
 
     cfgparser.read(config)
 
@@ -179,7 +179,7 @@ def import_metadata(config):
 # To remove specified wells from further analysis
 def removeWellsFromWellList(wells_to_remove, config):
     # parse config
-    cfgparser = ConfigParser.ConfigParser()
+    cfgparser = configparser.ConfigParser()
     cfgparser.read(config)
     wellnamespath = cfgparser.get("var", "wellnamespath")
     metadatadir = cfgparser.get("var", "metadatadir")

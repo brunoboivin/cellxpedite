@@ -5,7 +5,7 @@ import sys, os, csv
 import skimage.io
 from src.utils import metadataExtractor, cxpPrinter
 from scipy.spatial import distance
-import scipy.misc, scipy.stats, scipy.cluster
+import scipy.stats, scipy.cluster
 from scipy.cluster.hierarchy import dendrogram
 import mlpy
 import matplotlib.pyplot as plt

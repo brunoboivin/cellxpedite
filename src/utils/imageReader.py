@@ -1,6 +1,6 @@
 import os
 import numpy
-import scipy.misc
+import imageio
 import bioformats
 import javabridge
 
@@ -57,7 +57,7 @@ def import_dstack_from_well_dataframe(metadata_config, df, site = 1):
 
 
 def read_image(image_path):
-    img = scipy.misc.imread(image_path)
+    img = imageio.imread(image_path)
     if img.ndim == 3:  # assumes RGB format
         img = img[:,:,0]
     return img

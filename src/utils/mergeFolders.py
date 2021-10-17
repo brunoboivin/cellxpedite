@@ -2,7 +2,7 @@ from __future__ import division
 import os
 import sys
 import re
-import ConfigParser
+import configparser
 from src.utils import cxpPrinter
 
 
@@ -39,7 +39,7 @@ def mergeFolders(folder1, folder2, output_dir, config):
     cxpPrinter.cxpPrint('Merging data from input folders')
 
     # parse config file
-    cfgparser = ConfigParser.ConfigParser()
+    cfgparser = configparser.ConfigParser()
     cfgparser.read(config)
     filename_pattern = cfgparser.get("re", "image_names_pattern")
 
