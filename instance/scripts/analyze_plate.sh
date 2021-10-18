@@ -72,14 +72,12 @@ if [ ! "$(ls -A ${ANALYSISPATH}/metadata)" ]; then
 fi
 # Generate illum filelist
 python ${SRCPATH}/utils/filelistGenerator.py "${INPUTDIR}" "${ANALYSISPATH}"/filelists ${CONFIGFILE} 0.2
-source deactivate cxp
 
 # make cellprofiler script executable
 chmod 777 ${GITPROJECTPATH}/instance/scripts/run_cell_profiler.sh
 
 # Illumination correction pipeline
 if [ ! "$(ls -A ${ANALYSISPATH}/illum)" ]; then
-    source activate cellpainting_python_3
     cd ${GITPROJECTPATH}/instance/scripts
     ./run_cell_profiler.sh -b "${DATASET}" \
     --filelist_dir "${ANALYSISPATH}"/filelists \
@@ -88,12 +86,10 @@ if [ ! "$(ls -A ${ANALYSISPATH}/illum)" ]; then
     --cp_docker_image woolflabhms/cellprofiler:2.2.1 \
     --tmpdir /home/ubuntu/tmp/ \
     -o "${ANALYSISPATH}"/illum
-    source deactivate cellpainting_python_3
     echo `date` "=> Illum pipeline" >> "${TIMESTAMPSFILE}"
 fi
 
 # als env for python code
-source activate cxp
 cd ${GITPROJECTPATH}
 
 # Global decay
@@ -106,7 +102,6 @@ if [ ! "$(ls -A ${ANALYSISPATH}/maxproj)" ]; then
     cat "${ANALYSISPATH}"/metadata/well_names.txt | parallel --no-notice -j ${NUMJOBSPARALLEL} python ${SRCPATH}/img_processing/computeMaxProjections.py ${CONFIGFILE} {}
     echo `date` "=> Max proj" >> "${TIMESTAMPSFILE}"
 fi
-source deactivate cxp
 
 # Image segmentation based on max projections
 if [ ! "$(ls -A ${ANALYSISPATH}/segments)" ]; then
@@ -114,7 +109,6 @@ if [ ! "$(ls -A ${ANALYSISPATH}/segments)" ]; then
     find "${ANALYSISPATH}"/maxproj -type f > "${ANALYSISPATH}"/filelists/segment_filelist.txt
 
     # Segmentation pipeline ( ${SEGMENTPIPELINE} )
-    source activate cellpainting_python_3
     cd ${GITPROJECTPATH}/instance/scripts
     ./run_cell_profiler.sh -b "${DATASET}" \
     --filelist_dir "${ANALYSISPATH}"/filelists \
@@ -123,16 +117,14 @@ if [ ! "$(ls -A ${ANALYSISPATH}/segments)" ]; then
     --cp_docker_image woolflabhms/cellprofiler:3.0.0 \
     --tmpdir /home/ubuntu/tmp/ \
     -o "${ANALYSISPATH}"/segments
-    source deactivate cellpainting_python_3
     echo `date` "=> Segment pipeline" >> "${TIMESTAMPSFILE}"
 fi
 
-# Time series extraction & merging of fragments
-#  ** we need the input images for this operation
-source activate cxp
 # remove substandard wells to prevent further analysis on them
 python ${SRCPATH}/utils/removeSubstandardWells.py ${CONFIGFILE}
 
+# Time series extraction & merging of fragments
+#  ** we need the input images for this operation
 cd ${GITPROJECTPATH}
 if [ ! "$(ls -A ${ANALYSISPATH}/timeseries)" ]; then
     # extract time series

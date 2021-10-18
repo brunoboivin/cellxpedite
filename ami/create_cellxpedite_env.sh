@@ -25,7 +25,7 @@ rm Miniconda3-py39_4.10.3-Linux-x86_64.sh
 conda update -y conda
 conda config --set always_yes True
 
-# create conda environment for using CELLXPEDITE
+# conda environment for using CELLXPEDITE
 tee /home/ubuntu/cxp_env.yml <<EOL
 name: cxp
 channels:
@@ -44,6 +44,7 @@ dependencies:
   - pyyaml=5.4.1
   - pip:
     - cython==0.29.24
+    - machine-learning-py==3.5.8
     - matplotlib==3.3.4
     - numpy==1.19.3
     - pandas==1.1.5
@@ -54,42 +55,19 @@ dependencies:
 EOL
 conda env create -f cxp_env.yml
 
-# install mlpy
-source activate cxp
-wget https://sourceforge.net/projects/mlpy/files/mlpy%203.5.0/mlpy-3.5.0.tar.gz
-tar xvzf mlpy-3.5.0.tar.gz
-rm mlpy-3.5.0.tar.gz
-cd mlpy-3.5.0/
-python setup.py install
-
-# configure a conda environment for using Cell Painting scripts with python 3
-tee /home/ubuntu/conda_env_cellpainting_python_3.yml <<EOL
-name: cellpainting_python_3
-channels:
-  - conda-forge
-  - anaconda
-dependencies:
-  - python=3
-  - csvkit
-  - ipython
-  - jq
-  - pyyaml
-EOL
-conda env create -f conda_env_cellpainting_python_3.yml
-
-
 # docker
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-# provide necessary permissions
+
 sudo groupadd docker
 sudo usermod -aG docker $USER
 sudo systemctl enable docker
 sudo service docker start
-# include cellprofiler images
+
+# cellprofiler
 sudo docker pull woolflabhms/cellprofiler:2.2.1
 sudo docker pull woolflabhms/cellprofiler:3.0.0
 
